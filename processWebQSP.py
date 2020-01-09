@@ -1,10 +1,11 @@
 import json
 old_path = "RL_train_TR_sub_old.question"
+test_path = "RL_test_TR_sub_webqsp.question"
 new_dict = {}
-with open(old_path, "r", encoding='UTF-8') as webQaData:
+with open(test_path, "r", encoding='UTF-8') as webQaData:
     load_dict = json.load(webQaData)
     for key, value in load_dict.items():
-        if "WebQTrn" not in key:
+        if "WebQTest" not in key:
             continue
         cur_dict = {}
         cur_dict["question"] = value["question"]
@@ -19,9 +20,6 @@ with open(old_path, "r", encoding='UTF-8') as webQaData:
         cur_dict["entity_mask"] = value["entity_mask"]
         cur_dict["relation_mask"] = value["relation_mask"]
         cur_dict["type_mask"] = value["type_mask"]
-
-
-
 
         str_elist = []
         for i in range(len(value["entity"])):
@@ -45,5 +43,6 @@ with open(old_path, "r", encoding='UTF-8') as webQaData:
         cur_dict["input"] = input_str
 
         new_dict[key] = cur_dict
-fw = open('RL_train_TR_sub_webqsp.json', 'w', encoding="UTF-8")
+# fw = open('RL_train_TR_sub_webqsp.json', 'w', encoding="UTF-8")
+fw = open('RL_test_TR_sub_webqsp.json', 'w', encoding="UTF-8")
 fw.writelines(json.dumps(new_dict, indent=1, ensure_ascii=False))
