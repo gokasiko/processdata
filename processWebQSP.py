@@ -13,6 +13,7 @@ with open(test_path, "r", encoding='UTF-8') as webQaData:
         cur_dict["relation"] = value["relation"]
         cur_dict["type"] = value["type"]
         cur_dict["context_ints"] = {}
+        cur_dict["response_bools"] = {}
         response_entities_list = []
         for key_a in value["answers"]:
             response_entities_list.append(key_a["AnswerArgument"])
@@ -20,6 +21,10 @@ with open(test_path, "r", encoding='UTF-8') as webQaData:
         cur_dict["entity_mask"] = value["entity_mask"]
         cur_dict["relation_mask"] = value["relation_mask"]
         cur_dict["type_mask"] = value["type_mask"]
+
+        orig_response_list = []
+        cur_dict["orig_response"] = orig_response_list
+
 
         str_elist = []
         for i in range(len(value["entity"])):
