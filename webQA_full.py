@@ -75,23 +75,29 @@ datapath_train = "WebQSP.train.json"
 datapath_test = "WebQSP.test.json"
 out_train = "WebQSP_questions_train.json"
 out_test = "WebQSP_questions_test.json"
-with open(datapath_train, "r", encoding='UTF-8') as webQaData:
+with open(datapath_test, "r", encoding='UTF-8') as webQaData:
     dict2file = {}
     load_dict = json.load(webQaData)
     myquestions = load_dict["Questions"]
+    type_dict = {}
     for q in myquestions:
         question = q["ProcessedQuestion"]
-        # answer = q["Parses"][0]["Answers"][0]["AnswerArgument"]
+        id = q["QuestionId"]
         Answers = []
         answerList = q["Parses"][0]["Answers"]
         for an in answerList:
             Answers.append(an['AnswerArgument'])
-        # print(answer)
+            if (an['AnswerType'] == "Value"):
+                type_dict.update({id: 0})
+            # type_dict.update({an['AnswerType']: 0})
+
+
+        # print(Answers)
         sparql = q["Parses"][0]["Sparql"]
         dict_item = {}
-        dict_item
-        dict2file[]
-    with open(datapath_train, "r", encoding='UTF-8') as webQaData:
+    print(type_dict)
+
+
 
 
 
